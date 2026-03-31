@@ -1,5 +1,5 @@
 # ── Base ─────────────────────────────────────────────────────────
-FROM runpod/pytorch:1.0.1-cu1280-torch280-ubuntu2404
+FROM runpod/pytorch:1.0.2-cu1281-torch280-ubuntu2404
 ENV HF_HUB_ENABLE_HF_TRANSFER=1
 ENV DEBIAN_FRONTEND=noninteractive
 WORKDIR /workspace
@@ -30,6 +30,23 @@ RUN .venv/bin/pip install \
     packaging \
     ninja \
     --quiet
+
+# ── Custom Nodes ─────────────────────────────────────────────────
+RUN cd /workspace/ComfyUI/custom_nodes && \
+    git clone https://github.com/ltdrdata/ComfyUI-Manager && \
+    git clone https://github.com/Lightricks/ComfyUI-LTXVideo && \
+    git clone https://github.com/city96/ComfyUI-GGUF && \
+    git clone https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite && \
+    git clone https://github.com/kijai/ComfyUI-KJNodes && \
+    git clone https://github.com/rgthree/rgthree-comfy && \
+    git clone https://github.com/yolain/ComfyUI-Easy-Use && \
+    git clone https://github.com/olduvai-jp/ComfyUI-S3-IO
+
+RUN for dir in /workspace/ComfyUI/custom_nodes/*/; do \
+        if [ -f "$dir/requirements.txt" ]; then \
+            /workspace/ComfyUI/.venv/bin/pip install -r "$dir/requirements.txt" --quiet || true; \
+        fi \
+    done
 
 # ── SageAttention (SM89/Ada - compiled on RTX 4090) ──────────────
 RUN .venv/bin/pip install \
