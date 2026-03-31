@@ -50,7 +50,7 @@ RUN for dir in /workspace/ComfyUI/custom_nodes/*/; do \
 
 # ── Fix torch (node deps may have overwritten it) ────────────────
 RUN .venv/bin/pip install \
-    torch==2.8.0 torchvision torchaudio \
+    torch==2.8.0+cu128 torchvision==0.23.0+cu128 torchaudio==2.8.0+cu128 \
     --index-url https://download.pytorch.org/whl/cu128 \
     --quiet
 
