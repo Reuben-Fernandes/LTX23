@@ -80,7 +80,7 @@ base = "$COMFYUI_DIR/models"
 
 models = [
     # ── Diffusion model (GGUF distilled for 24GB VRAM) ───────────
-    ("diffusion_models/LTX-2.3-distilled-Q4_K_S.gguf",                       "diffusion_models"),
+    ("diffusion_models/LTX-2.3-distilled-Q4_K_S.gguf",                       "unet"),
 
     # ── Text encoder (Gemma 3 GGUF + text projection) ────────────
     ("text_encoders/gemma-3-12b-it-Q2_K.gguf",                               "text_encoders"),
@@ -91,12 +91,8 @@ models = [
     ("vae/LTX23_audio_vae_bf16.safetensors",                                  "vae"),
     ("vae/taeltx2_3.safetensors",                                             "vae"),
 
-    # ── Latent upscalers ─────────────────────────────────────────
+    # ── Latent upscaler ──────────────────────────────────────────
     ("latent_upscale_models/ltx-2.3-spatial-upscaler-x2-1.0.safetensors",    "latent_upscale_models"),
-    ("latent_upscale_models/ltx-2.3-temporal-upscaler-x2-1.0.safetensors",   "latent_upscale_models"),
-
-    # ── Distilled LoRA (needed for two-stage upscale pipeline) ───
-    ("loras/ltx-2.3-22b-distilled-lora-384.safetensors",                     "loras"),
 ]
 
 for filename, dest_folder in models:
@@ -145,12 +141,6 @@ else
     [[ $MODEL_OK -ne 0 ]] && echo "⚠️  Some model downloads failed"
     [[ $NODES_OK -ne 0 ]] && echo "⚠️  Some node installs failed"
 fi
-
-# ── Download Workflows ───────────────────────────────────────────
-echo "  → Downloading workflows..."
-mkdir -p "$COMFYUI_DIR/user/default/workflows"
-curl -fsSL https://raw.githubusercontent.com/Reuben-Fernandes/ComfyUI-Workflows/main/LTX_2_3.json \
-    -o "$COMFYUI_DIR/user/default/workflows/LTX_2_3.json" && echo "  ✓ LTX_2_3.json" || true
 
 # ── Launch Jupyter Lab ───────────────────────────────────────────
 echo "  → Starting Jupyter Lab on port 8888..."
