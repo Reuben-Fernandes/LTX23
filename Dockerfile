@@ -54,9 +54,9 @@ RUN .venv/bin/pip install \
     --index-url https://download.pytorch.org/whl/cu128 \
     --quiet
 
-# ── SageAttention (SM89/Ada - compiled on RTX 4090) ──────────────
+# ── SageAttention (built on torch 2.8.0+cu128, SM89/RTX 4090) ───
 RUN .venv/bin/pip install \
-    https://huggingface.co/ReubenF10/ComfyUI-Models/resolve/main/wheels/sageattention-2.2.0-cp312-cp312-linux_x86_64.whl \
+    https://huggingface.co/ReubenF10/ComfyUI-Models/resolve/main/wheels/ltx/sageattention-2.2.0-cp312-cp312-linux_x86_64.whl \
     --quiet
 
 # ── Ports ────────────────────────────────────────────────────────
