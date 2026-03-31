@@ -1,5 +1,5 @@
 # ── Base ─────────────────────────────────────────────────────────
-FROM runpod/pytorch:1.0.2-cu1281-torch280-ubuntu2404
+FROM runpod/pytorch:1.0.1-cu1280-torch280-ubuntu2404
 ENV HF_HUB_ENABLE_HF_TRANSFER=1
 ENV DEBIAN_FRONTEND=noninteractive
 WORKDIR /workspace
