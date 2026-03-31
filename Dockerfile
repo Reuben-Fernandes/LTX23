@@ -48,6 +48,12 @@ RUN for dir in /workspace/ComfyUI/custom_nodes/*/; do \
         fi \
     done
 
+# ── Fix torch (node deps may have overwritten it) ────────────────
+RUN .venv/bin/pip install \
+    torch==2.8.0 torchvision torchaudio \
+    --index-url https://download.pytorch.org/whl/cu128 \
+    --quiet
+
 # ── SageAttention (SM89/Ada - compiled on RTX 4090) ──────────────
 RUN .venv/bin/pip install \
     https://huggingface.co/ReubenF10/ComfyUI-Models/resolve/main/wheels/sageattention-2.2.0-cp312-cp312-linux_x86_64.whl \
