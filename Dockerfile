@@ -36,7 +36,12 @@ RUN cd /workspace/ComfyUI/custom_nodes && \
     git clone https://github.com/kijai/ComfyUI-KJNodes && \
     git clone https://github.com/rgthree/rgthree-comfy && \
     git clone https://github.com/yolain/ComfyUI-Easy-Use && \
-    git clone https://github.com/chrisgoringe/cg-use-everywhere
+    git clone https://github.com/olduvai-jp/ComfyUI-S3-IO && \
+    git clone https://github.com/pythongosssss/ComfyUI-Custom-Scripts && \
+    git clone https://github.com/chrisgoringe/cg-use-everywhere && \
+    git clone https://github.com/city96/ComfyUI_ExtraModels && \
+    git clone https://github.com/evanspearman/ComfyMath && \
+    git clone https://github.com/PGCRT/CRT-Nodes
 RUN for dir in /workspace/ComfyUI/custom_nodes/*/; do \
         if [ -f "$dir/requirements.txt" ]; then \
             /workspace/ComfyUI/.venv/bin/pip install -r "$dir/requirements.txt" --quiet || true; \
